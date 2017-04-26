@@ -27,13 +27,16 @@ public class WordDAO {
 			List<String> parole = new ArrayList<String>();
 			
 			for(int i = 0 ; i < numeroLettere ; i++){
-				temp = parola;
-				temp.replace(parola.charAt(i), '_');
+				if(i==0)
+					temp = "_" + parola.substring(1, parola.length());
+				else
+					temp = parola.substring(0,i) + "_" + parola.substring(i+1,parola.length());
 				st.setString(2,temp);
 				ResultSet res = st.executeQuery();
 
 				while (res.next())
-					parole.add(res.getString("nome"));
+					if(!res.getString("nome").equals(parola))
+						parole.add(res.getString("nome"));
 			}
 
 			return parole;

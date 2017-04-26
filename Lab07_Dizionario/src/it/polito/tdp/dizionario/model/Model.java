@@ -38,18 +38,17 @@ public class Model {
 		
 		System.out.println(grafo);
 
-		//System.out.println("Model -- TODO");
 		return ris;
 	}
 
 	public List<String> displayNeighbours(String parolaInserita) {
 		
-		if(!grafo.containsVertex(parolaInserita))
+		if(grafo==null || !grafo.containsVertex(parolaInserita))
 			return null;
 		
-		//List<String> ris = new ArrayList<String>(Graphs.neighborListOf(grafo, parolaInserita));
-		WordDAO dao = new WordDAO();
-		List<String> ris = dao.getAllSimilarWords(parolaInserita, parolaInserita.length());
+		List<String> ris = new ArrayList<String>(Graphs.neighborListOf(grafo, parolaInserita)); //Implementazione Java
+		/*WordDAO dao = new WordDAO();															//Implementazione SQL
+		List<String> ris = dao.getAllSimilarWords(parolaInserita, parolaInserita.length());*/
 
 		return ris;
 	}
@@ -82,7 +81,7 @@ public class Model {
 		
 		for(String s : Graphs.neighborListOf(grafo, vertex))
 			ris += s + "\n";
-		//System.out.println("Model -- TODO");
+
 		return ris.trim();
 	}
 	
@@ -98,5 +97,10 @@ public class Model {
 			return true;
 		else
 			return false;
+	}
+
+	public void reset() {
+		grafo = null;
+		
 	}
 }

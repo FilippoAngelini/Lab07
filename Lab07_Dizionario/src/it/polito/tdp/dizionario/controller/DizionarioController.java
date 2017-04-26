@@ -38,6 +38,12 @@ public class DizionarioController {
 
 	@FXML
 	void doReset(ActionEvent event) {
+		
+		model.reset();
+		
+		inputNumeroLettere.clear();
+		inputParola.clear();
+		
 		txtResult.setText("Reset!");
 	}
 
