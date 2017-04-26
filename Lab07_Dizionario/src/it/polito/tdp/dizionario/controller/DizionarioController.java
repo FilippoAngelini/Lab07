@@ -1,8 +1,10 @@
 package it.polito.tdp.dizionario.controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.dizionario.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,6 +29,12 @@ public class DizionarioController {
 	private Button btnTrovaVicini;
 	@FXML
 	private Button btnTrovaGradoMax;
+	
+	private Model model;
+	
+	public void setModel (Model model){
+		this.model=model;
+	}
 
 	@FXML
 	void doReset(ActionEvent event) {
@@ -35,9 +43,14 @@ public class DizionarioController {
 
 	@FXML
 	void doGeneraGrafo(ActionEvent event) {
+		
+		if(!inputNumeroLettere.getText().equals("") && inputNumeroLettere.getText().matches("[0-9]*"))
+			txtResult.setText(model.createGraph(Integer.parseInt(inputNumeroLettere.getText())).toString());
+		else
+			txtResult.setText("Attenzione: inserisci un numero!");
 
 		try {
-			txtResult.setText("Controller -- TODO!");
+			//txtResult.setText("Controller -- TODO!");
 			
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
@@ -47,8 +60,12 @@ public class DizionarioController {
 	@FXML
 	void doTrovaGradoMax(ActionEvent event) {
 		
+		txtResult.clear();
+		
+		txtResult.appendText(model.findMaxDegree());
+		
 		try {
-			txtResult.setText("Controller -- TODO!");
+			//txtResult.setText("Controller -- TODO!");
 
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
@@ -58,8 +75,15 @@ public class DizionarioController {
 	@FXML
 	void doTrovaVicini(ActionEvent event) {
 		
+		List<String> ris = model.displayNeighbours(inputParola.getText());
+		
+		if(ris!=null)
+			txtResult.setText(ris.toString());
+		else
+			txtResult.setText("Attenzione: parola non trovata.");
+		
 		try {
-			txtResult.setText("Controller -- TODO!");
+			//txtResult.setText("Controller -- TODO!");
 
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
