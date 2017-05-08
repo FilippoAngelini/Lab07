@@ -29,6 +29,8 @@ public class DizionarioController {
 	private Button btnTrovaVicini;
 	@FXML
 	private Button btnTrovaGradoMax;
+	@FXML
+	private Button btnTrovaTuttiVicini;
 	
 	private Model model;
 	
@@ -94,6 +96,12 @@ public class DizionarioController {
 		} catch (RuntimeException re) {
 			txtResult.setText(re.getMessage());
 		}
+	}
+	
+	@FXML
+	void doTrovaTuttiVicini(ActionEvent event) {
+		
+		txtResult.setText(model.trovaTuttiViciniRicorsivo(inputParola.getText()));
 	}
 
 	@FXML
